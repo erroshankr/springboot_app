@@ -1,44 +1,44 @@
 package com.example.demo.service;
 
 import com.example.demo.beans.IceCream;
+import com.example.demo.repo.IceCreamRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
 @Component
 public class IceCreamService {
 
-    public static Map<Integer, IceCream> iceCreamMap = new HashMap<>();
 
-    public IceCream getIceCreamByID(int id){
-         return iceCreamMap.get(id);
+    @Autowired
+    private IceCreamRepository iceCreamRepository;
+
+    public IceCream getIceCreamByID(Long id){
+         Optional<IceCream> opt =  iceCreamRepository.findById(id);
+         if(opt.isPresent()){
+             return opt.get();
+         }
+         return null;
     }
 
     public void createIceCream(IceCream iceCream){
-        iceCreamMap.put(iceCream.getId(), iceCream);
+        iceCreamRepository.save(iceCream);
     }
 
     public void updateIceCream(IceCream iceCream){
-        iceCreamMap.put(iceCream.getId(), iceCream);
+        iceCreamRepository.save(iceCream);
     }
-    public void deleteIceCream(int id){
-        iceCreamMap.remove(id);
+    public void deleteIceCream(Long id){
+        iceCreamRepository.deleteById(id);
     }
 
     public List<IceCream> getAllIceCream(){
-        return new ArrayList<>(iceCreamMap.values());
+        return iceCreamRepository.findAll();
     }
 
     public List<IceCream> getIceCreamByColor(String color){
-        List<IceCream> iceCreamList = new ArrayList<>();
-        for(IceCream iceCream : iceCreamMap.values()){
-            if(iceCream.getColor().equals(color)){
-                iceCreamList.add(iceCream);
-            }
-        }
-        return iceCreamList;
+       return iceCreamRepository.findAllByColor(color);
     }
 }

@@ -9,10 +9,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/food")
-public class IceCreamController {
+public class IceCreamController { // CRUD Operations
 
-    @Autowired
-    private IceCream iceCream;
+   /* @Autowired
+    private IceCream iceCream;*/
 
     @Autowired
     private IceCreamService iceCreamService;
@@ -25,9 +25,9 @@ public class IceCreamController {
     @GetMapping("/fetchById/{id}")
     public IceCream getIceCreamByID(@PathVariable String id) {
         System.out.println("Inside getIceCreamByID");
-        IceCream i =  iceCreamService.getIceCreamByID(Integer.parseInt(id));
+        IceCream i =  iceCreamService.getIceCreamByID(Long.parseLong(id));
         if(i == null){
-            return iceCream;
+            return null;
         }else{
             return i;
         }
@@ -49,12 +49,12 @@ public class IceCreamController {
     }
 
     @DeleteMapping("/delete/icecream/{id}")
-    public void deleteIceCreamByID(@RequestParam Integer id){
+    public void deleteIceCreamByID(@PathVariable Long id){
         iceCreamService.deleteIceCream(id);
     }
 
-    @PutMapping("/create/icecream")
-    public void updateIceCream(@RequestBody IceCream iceCream){
+    @PutMapping("/update/icecream/{id}")
+    public void updateIceCream(@PathVariable Long id, @RequestBody IceCream iceCream){
         iceCreamService.updateIceCream(iceCream);
     }
 
