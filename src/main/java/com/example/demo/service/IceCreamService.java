@@ -28,6 +28,7 @@ public class IceCreamService {
     }
 
     public void updateIceCream(IceCream iceCream){
+        iceCream.setId(iceCream.getId());
         iceCreamRepository.save(iceCream);
     }
     public void deleteIceCream(Long id){

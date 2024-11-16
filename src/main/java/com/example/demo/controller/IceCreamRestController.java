@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/food")
-public class IceCreamController { // CRUD Operations
+public class IceCreamRestController { // CRUD Operations
 
    /* @Autowired
     private IceCream iceCream;*/
@@ -44,8 +44,8 @@ public class IceCreamController { // CRUD Operations
     }
 
     @PostMapping("/create/icecream")
-    public void createIceCream(@RequestBody IceCream iceCream){
-         iceCreamService.createIceCream(iceCream);
+    public void createIceCream(@RequestBody IceCream iceCream){    // data flow : frontend --> Backend
+         iceCreamService.createIceCream(iceCream); // data flow : backend --> frontend
     }
 
     @DeleteMapping("/delete/icecream/{id}")
