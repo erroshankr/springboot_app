@@ -55,7 +55,7 @@ public class IceCreamRestController { // CRUD Operations
 
     @PutMapping("/update/icecream/{id}")
     public void updateIceCream(@PathVariable Long id, @RequestBody IceCream iceCream){
-        iceCreamService.updateIceCream(iceCream);
+        iceCreamService.updateIceCream(id, iceCream);
     }
 
    /* @GetMapping("/icecream")

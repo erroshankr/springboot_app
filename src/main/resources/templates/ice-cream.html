@@ -208,20 +208,23 @@
 
     async function deleteRow(element) {
         const row = element.closest('tr');
-        const id = row.getAttribute('data-id');
+        const id = row.querySelector('td').innerText.trim(); // Get ID from the first column
 
         try {
-            const response = await fetch(`/delete/icecream/${id}`, {
+            const response = await fetch(`/html/delete/icecream/${id}`, {
                 method: 'DELETE'
             });
 
             if (response.ok) {
                 row.remove(); // Remove the row from the table
+            } else {
+                console.error("Failed to delete ice cream");
             }
         } catch (error) {
             console.error("Error:", error);
         }
     }
+
 
     function editRow(element) {
         const row = element.closest('tr');

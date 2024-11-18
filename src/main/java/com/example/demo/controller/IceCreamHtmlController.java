@@ -96,7 +96,7 @@ public class IceCreamHtmlController {
     @PutMapping("/update/icecream/{id}")
     public String updateIceCream(@PathVariable Long id, @RequestBody IceCream iceCream, Model model) {
         try {
-            iceCreamService.updateIceCream(iceCream);
+            iceCreamService.updateIceCream(id, iceCream);
             model.addAttribute("iceCreamLi", iceCreamService.getAllIceCream());
             model.addAttribute("info", "SUCCESS");
         }catch (Exception e){

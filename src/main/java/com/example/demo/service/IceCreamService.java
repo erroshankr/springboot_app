@@ -27,10 +27,18 @@ public class IceCreamService {
         iceCreamRepository.save(iceCream);
     }
 
-    public void updateIceCream(IceCream iceCream){
-        iceCream.setId(iceCream.getId());
-        iceCreamRepository.save(iceCream);
+    public void updateIceCream(Long id, IceCream iceCream){
+        Optional<IceCream> opt = iceCreamRepository.findById(id);
+        if(opt.isPresent()){
+           IceCream updatedIceCream = opt.get();
+           updatedIceCream.setName(iceCream.getName());
+           updatedIceCream.setPrice(iceCream.getPrice());
+           updatedIceCream.setFlavour(iceCream.getFlavour());
+           updatedIceCream.setColor(iceCream.getColor());
+           iceCreamRepository.save(updatedIceCream);
+        }
     }
+
     public void deleteIceCream(Long id){
         iceCreamRepository.deleteById(id);
     }
